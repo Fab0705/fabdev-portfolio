@@ -52,6 +52,10 @@ export default function useAutoScroller(): void {
         try {
           const seconds = Math.max(12, Math.round(contentWidth / 120));
           scroller.style.setProperty("--_animation-duration", `${seconds}s`);
+
+          // 👇 NUEVO: calculamos el desplazamiento exacto hasta la mitad del contenido
+          const halfWidth = contentWidth / 2;
+          scroller.style.setProperty("--_scroll-distance", `-${halfWidth}px`);
         } catch (e) {
           // noop
         }
