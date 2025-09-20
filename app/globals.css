@@ -167,7 +167,7 @@
     @apply text-3xl mb-3;
   }
   .info-card {
-    @apply pt-24 px-8 pb-11;
+    @apply pt-24 px-8 pb-11 hover:scale-105 hover:text-indigo-400 transition-all duration-200 ease-in-out;
   }
 
   .tag-list{
