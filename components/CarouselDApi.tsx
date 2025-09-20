@@ -27,7 +27,7 @@ export default function CarouselDApi({ children }: { children: React.ReactNode }
 
   return (
     <div className="">
-      <Carousel setApi={setApi} className="w-full">
+      <Carousel  opts={{ loop: true }} setApi={setApi} className="w-full">
         <CarouselContent>
           {children}
         </CarouselContent>
