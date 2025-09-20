@@ -19,14 +19,21 @@ import Bootstrap from "@/public/TechIcons/bootstrap-4.svg";
 
 import FiverrLogo from "@/public/TechIcons/fiverr-icon.svg";
 
+
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import {
   Carousel,
@@ -40,8 +47,7 @@ import { MdWeb, MdBusinessCenter, MdOutlineLocalGroceryStore, MdEmail  } from "r
 import { BsDatabase } from "react-icons/bs";
 import { RiCloudLine, RiCodeSSlashLine } from "react-icons/ri";
 import { GoArrowUpRight } from "react-icons/go";
-import { FaGithub, FaPhoneAlt, FaLinkedin, FaFacebook } from "react-icons/fa";
-import { SiX } from "react-icons/si"
+import { FaGithub, FaPhoneAlt, FaLinkedin } from "react-icons/fa";
 import { TbAutomation } from "react-icons/tb";
 import { HiOutlineCode } from "react-icons/hi";
 import useAutoScroller from "@/hooks/useAutoScroller";
@@ -79,30 +85,95 @@ export default function Home() {
   ]
 
   const projects = [
-    { name: "Inventory Management System", description: "System developed to optimize spare parts management across multiple warehouses, reducing stock discrepancies and improving tracking of supplies", time: "2 months", tech: "ASP.NET Core Web API, React, SQL Server, Rechart" },
-    { name: "E-Commerce Platform", description: "A scalable e-commerce platform with integrated payment gateways, product management, and user authentication.", time: "3 months", tech: "Next.js, Node.js, MongoDB, Stripe API" },
-    { name: "CRM System", description: "Custom CRM solution to manage customer relationships, track sales, and automate marketing campaigns.", time: "4 months", tech: "React, NestJS, PostgreSQL, SendGrid API" },
-    { name: "Project Management Tool", description: "A web-based project management tool with task tracking, team collaboration, and reporting features.", time: "3 months", tech: "Angular, ASP.NET Core, MySQL" }
+    { name: "Inventory Management System (Multi-Warehouse)", description: "System developed to optimize spare parts management across multiple warehouses, reducing stock discrepancies and improving tracking of supplies", time: "2 months", tech: "ASP.NET Core Web API, React, SQL Server, Rechart", features: [
+                    "Multi-warehouse inventory tracking",
+                    "Real-time stock and sales reports",
+                    "Role-based authentication & permissions",
+                    "Dashboard with interactive charts"
+                ], images: [
+                  FabPhoto, FabPhoto, FabPhoto, FabPhoto
+                ], githubLink: "https://github.com/Fab0705/ManagementInventorySystemV1.git"},
+    { name: "E-Commerce Platform", description: "A scalable e-commerce platform with integrated payment gateways, product management, and user authentication.", time: "3 months", tech: "Next.js, Node.js, MongoDB, Stripe API", features: [
+                    "Product catalog with search and filtering",
+                    "Shopping cart and wishlist functionality",
+                    "Secure payment processing with Stripe",
+                    "Order history and tracking"
+                ], images: [
+                  FabPhoto, FabPhoto, FabPhoto, FabPhoto
+                ], githubLink: "https://github.com/Fab0705/ManagementInventorySystemV1.git" },
+    { name: "CRM System", description: "Custom CRM solution to manage customer relationships, track sales, and automate marketing campaigns.", time: "4 months", tech: "React, NestJS, PostgreSQL, SendGrid API", features: [
+                    "Product catalog with search and filtering",
+                    "Shopping cart and wishlist functionality",
+                    "Secure payment processing with Stripe",
+                    "Order history and tracking"
+                ], images: [
+                  FabPhoto, FabPhoto, FabPhoto, FabPhoto
+                ], githubLink: "https://github.com/Fab0705/ManagementInventorySystemV1.git" },
+    { name: "Project Management Tool", description: "A web-based project management tool with task tracking, team collaboration, and reporting features.", time: "3 months", tech: "Angular, ASP.NET Core, MySQL", features: [
+                    "Product catalog with search and filtering",
+                    "Shopping cart and wishlist functionality",
+                    "Secure payment processing with Stripe",
+                    "Order history and tracking"
+                ], images: [
+                  FabPhoto, FabPhoto, FabPhoto, FabPhoto
+                ], githubLink: "https://github.com/Fab0705/ManagementInventorySystemV1.git" }
   ];
 
   return (
     <div className="font-sans max-w-[1320px] mx-auto">
       <main className="flex flex-col gap-[32px] items-center sm:items-start w-full">
-        <ModeToggle />
-        <section id="home">
-          <div className="flex flex-col gap-10">
-            <h1 className="text-3xl">Hi! I'm <span className="text-red-400">Fabian Cristobal</span></h1>
-            <div className="mt-4">
-              <div className="relative">
-                <p className="text-lg text-muted-foreground pl-3">
-                  A passionate full-stack developer, building powerful and dynamic web applications that streamline operations and drive growth.
+        
+        <section id="home" className="w-full py-20 dark:bg-gradient-to-b transition-colors duration-300">
+          <div className="container mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 px-6">
+            
+            <div className="flex flex-col gap-6 max-w-xl">
+              <h1 className="
+                text-4xl md:text-5xl font-extrabold tracking-tight 
+                text-neutral-900 dark:text-white
+              ">
+                Hi! I'm <span className="text-violet-700 dark:text-violet-400">Fabian Cristobal</span>
+              </h1>
+
+              <div className="relative pl-4">
+                <span className="
+                  absolute top-0 left-0 block w-[4px] h-full rounded-sm animate-pulse 
+                  bg-gradient-to-b from-violet-500 to-purple-600
+                "></span>
+                <p className="text-lg md:text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                  A passionate full-stack developer, building powerful and dynamic web applications 
+                  that streamline operations and drive growth.
                 </p>
-                <span className="absolute top-0.5 block bg-amber-400 w-[4px] h-full rounded-sm"></span>
               </div>
+
+              {/* CTA */}
+              <div className="mt-4">
+                <a href="#projects">
+                  <Button 
+                    size="lg" 
+                    className="
+                      bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white 
+                      rounded-full shadow-lg transition-all duration-300
+                    "
+                  >
+                    View My Projects
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            {/* Imagen */}
+            <div className="flex justify-center w-full md:w-auto">
+              <Image 
+                src={FabPhoto} 
+                alt="Fabian Cristobal" 
+                className="
+                  rounded-full w-48 h-48 md:w-64 md:h-64 object-cover shadow-2xl 
+                  ring-4 ring-violet-300 dark:ring-violet-600
+                "
+              />
             </div>
           </div>
         </section>
-
         <div className="mt-10">
          <div className="scroller" data-direction="left" data-speed="fast">
             <ul className="tag-list scroller__inner">
@@ -133,235 +204,309 @@ export default function Home() {
           </div>
           
         </div>
-        <section id="services" className="w-full flex flex-col mt-10">
-          <h3 className='text-3xl text-white text-center'>
-            Designing solutions <span className="text-[#8f8f92]">customized <br /> to meet your requeriments</span>
+        <section id="services" className="w-full flex flex-col mt-20 px-6">
+          <h3 className="text-4xl md:text-5xl font-extrabold text-center text-neutral-900 dark:text-neutral-300">
+            Designing solutions{" "}
+            <span className="text-violet-700 dark:text-violet-400">
+              customized <br /> to meet your requirements
+            </span>
           </h3>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-6">
-            <Card className="w-full info-card">
-              <CardContent>
-                <MdWeb className='icon-info-card' />
-                <h2 className="text-xl mb-2">Web App Development</h2>
-                <p className="text-muted-foreground">Crafting visually appealing and user-friendly interfaces using <span className='text-indigo-400'>HTML</span>, <span className='text-indigo-400'>CSS</span>, <span className='text-indigo-400'>JavaScript</span>, <span className='text-indigo-400'>TypeScript</span> and modern frameworks like React.</p>
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 mt-12">
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <MdWeb className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">
+                  Web App Development
+                </h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Crafting visually appealing and user-friendly interfaces using{" "}
+                  <span className="text-violet-600 dark:text-violet-300">HTML</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">CSS</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">JavaScript</span> and modern frameworks like React.
+                </p>
               </CardContent>
             </Card>
-            <Card className="w-full info-card">
-              <CardContent>
-                <BsDatabase className='icon-info-card' />
-                <h2 className="text-xl mb-2">Database Management</h2>
-                <p className="text-muted-foreground">Designing and managing databases wih SQL technologies such as <span className='text-indigo-400'>Microsoft SQL Server</span>, <span className='text-indigo-400'>MySQL</span>, <span className='text-indigo-400'>PostgreSQL</span> and <span className='text-indigo-400'>Oracle</span>.</p>
+
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <BsDatabase className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">Database Management</h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Designing and managing databases with SQL technologies such as{" "}
+                  <span className="text-violet-600 dark:text-violet-300">Microsoft SQL Server</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">MySQL</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">PostgreSQL</span> and{" "}
+                  <span className="text-violet-600 dark:text-violet-300">Oracle</span>.
+                </p>
               </CardContent>
             </Card>
-            <Card className="w-full info-card">
-              <CardContent>
-                <RiCloudLine className='icon-info-card' />
-                <h2 className="text-xl mb-2">API Development</h2>
-                <p className="text-muted-foreground">Creating and integrating <span className='text-indigo-400'>RESTful APIs</span> to enable smooth comunication between front-end and back-end systems.</p>
+
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <RiCloudLine className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">API Development</h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Creating and integrating{" "}
+                  <span className="text-violet-600 dark:text-violet-300">RESTful APIs</span> to enable smooth communication between front-end and back-end systems.
+                </p>
               </CardContent>
             </Card>
-            <Card className="w-full info-card">
-              <CardContent>
-                <MdBusinessCenter className='icon-info-card' />
-                <h2 className="text-xl mb-2">Business Software Solutions</h2>
-                <p className="text-muted-foreground">Development of <span className='text-indigo-400'>CRM, ERP, and custom systems</span> to automate processes, improve productivity, and save costs in companies.</p>
+
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <MdBusinessCenter className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">Business Software Solutions</h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Development of{" "}
+                  <span className="text-violet-600 dark:text-violet-300">CRM, ERP, and custom systems</span> to automate processes, improve productivity, and save costs in companies.
+                </p>
               </CardContent>
             </Card>
-            <Card className="w-full info-card">
-              <CardContent>
-                <MdOutlineLocalGroceryStore className='icon-info-card' />
-                <h2 className="text-xl mb-2">E-Commerce Solutions</h2>
-                <p className="text-muted-foreground">Developing scalable and secure payment solutions for <span className='text-indigo-400'>e-commerce platforms</span> tailored to your business needs.</p>
+
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <MdOutlineLocalGroceryStore className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">E-Commerce Solutions</h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Developing scalable and secure payment solutions for{" "}
+                  <span className="text-violet-600 dark:text-violet-300">e-commerce platforms</span> tailored to your business needs.
+                </p>
               </CardContent>
             </Card>
-            <Card className="w-full info-card">
-              <CardContent>
-                <TbAutomation className='icon-info-card' />
-                <h2 className="text-xl mb-2">System Integration & Automation</h2>
-                <p className="text-muted-foreground">Connecting different platforms and services (external <span className='text-indigo-400'>APIs</span>, <span className='text-indigo-400'>payment gateways</span>, <span className='text-indigo-400'>logistics</span>, <span className='text-indigo-400'> marketing automation</span>) to centralize business operations.</p>
+
+            <Card className="w-full 
+                bg-white border border-violet-200 rounded-3xl 
+                text-center shadow-lg hover:shadow-violet-300/30 hover:-translate-y-2 
+                dark:bg-[#24163D] dark:border-violet-700 dark:hover:shadow-violet-700/30 
+                transition-all duration-300">
+              <CardContent className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-violet-500/20 mb-5">
+                  <TbAutomation className="text-violet-600 dark:text-violet-300 text-3xl" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-neutral-900 dark:text-white">System Integration & Automation</h3>
+                <p className="text-neutral-700 dark:text-neutral-300">
+                  Connecting different platforms and services (external{" "}
+                  <span className="text-violet-600 dark:text-violet-300">APIs</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">payment gateways</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">logistics</span>,{" "}
+                  <span className="text-violet-600 dark:text-violet-300">marketing automation</span>) to centralize business operations.
+                </p>
               </CardContent>
             </Card>
           </div>
         </section>
-        <section id="projects" className="w-full flex flex-col mt-10">
-          <h1 className="text-3xl text-white text-center mb-6">My Projects</h1>
+        <section id="projects" className="w-full flex flex-col mt-20 px-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center text-neutral-900 dark:text-white bg-clip-text mb-12">
+            My Projects
+          </h1>
+
           <CarouselDApi>
-            <CarouselItem>
-              <Card className="overflow-hidden shadow-lg rounded-2xl">
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row gap-10 items-streetch">
-                    
-                    <Carousel opts={{ loop: true }} className="w-full md:w-1/2 max-w-sm mx-auto">
-                      <CarouselContent>
-                        {Array.from({ length: 5 }).map((_, index) => (
-                          <CarouselItem key={index}>
-                            <div className="p-1">
-                              <Card>
-                                <CardContent className="flex aspect-square items-center justify-center p-6">
-                                  <span className="text-4xl font-semibold">{index + 1}</span>
-                                </CardContent>
-                              </Card>
-                            </div>
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <CarouselPrevious />
-                      <CarouselNext />
-                    </Carousel>
+            {projects.map((proj, index) => (
+              <CarouselItem key={index}>
+                <Card className="overflow-hidden rounded-2xl bg-gradient-to-b bg-white border border-violet-200 dark:bg-[#24163D] dark:border-violet-700 transition-all duration-300">
+                  <CardContent className="p-10">
+                    <div className="flex flex-col md:flex-row gap-10 items-stretch">
 
-                    
-                    <div className="flex flex-col justify-between md:w-1/2">
-                      <div className="flex flex-col gap-4">
-                        <h1 className="text-2xl font-bold tracking-tight">
-                          Inventory Management System (Multi-Warehouse)
-                        </h1>
-                        <p className="text-muted-foreground text-sm">
-                          System developed to optimize spare parts management across multiple warehouses, reducing stock discrepancies and improving tracking of supplies
-                        </p>
+                      {/* Carrusel de imágenes */}
+                      <Carousel opts={{ loop: true }} className="w-full md:w-1/2 max-w-md mx-auto">
+                        <CarouselContent>
+                          {proj.images.map((image, imageIndex) => (
+                            <CarouselItem key={imageIndex}>
+                              <div className="p-2">
+                                <Card className="bg-neutral-900 rounded-xl border border-gray-700/30 shadow-md hover:shadow-gray-400/10 transition">
+                                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                                    <Image src={image} alt={"Image"} className="rounded-md object-cover" />
+                                  </CardContent>
+                                </Card>
+                              </div>
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="bg-gray-700/30 hover:bg-gray-700/50 text-white rounded-full" />
+                        <CarouselNext className="bg-gray-700/30 hover:bg-gray-700/50 text-white rounded-full" />
+                      </Carousel>
 
-                        <ul className="space-y-2 text-sm">
-                          <li className="border-b pb-2 flex justify-between">
-                            <span>Completion Time</span>
-                            <span className="font-medium">2 months</span>
-                          </li>
-                          <li className="border-b pb-2 flex justify-between">
-                            <span>Technologies</span>
-                            <span className="font-medium">
-                              ASP.NET Core Web API, React, SQL Server, Rechart
-                            </span>
-                          </li>
-                          <li className="border-b pb-2">
-                            <span className="font-medium block mb-2">Key Features:</span>
-                            <ul className="list-disc list-inside pl-2 text-muted-foreground">
-                              <li>Multi-warehouse inventory tracking</li>
-                              <li>Real-time stock and sales reports</li>
-                              <li>Role-based authentication & permissions</li>
-                              <li>Dashboard with interactive charts</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
+                      {/* Info del proyecto */}
+                      <div className="flex flex-col justify-between md:w-1/2">
+                        <div className="flex flex-col gap-4">
+                          <h1 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
+                            {proj.name}
+                          </h1>
+                          <p className="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+                            {proj.description}
+                          </p>
 
-                      <div className="flex gap-3 pt-4">
-                        <a
-                          href="#"
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition"
-                        >
-                          <GoArrowUpRight />
-                          <span>View Demo</span>
-                        </a>
-                        <a
-                          href="#"
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium hover:bg-accent transition"
-                        >
-                          <FaGithub />
-                          <span>Source Code</span>
-                        </a>
+                          <ul className="space-y-3 text-sm">
+                            <li className="border-b border-gray-700/30 pb-2 flex justify-between">
+                              <span className="text-neutral-700 dark:text-neutral-300">Completion Time</span>
+                              <span className="text-violet-600 dark:text-violet-300">{proj.time}</span>
+                            </li>
+                            <li className="border-b border-gray-700/30 pb-2 flex justify-between">
+                              <span className="text-neutral-700 dark:text-neutral-300">Technologies</span>
+                              <span className="text-violet-600 dark:text-violet-300">
+                                {proj.tech}
+                              </span>
+                            </li>
+                            <li className="border-b border-gray-700/30 pb-2">
+                              <span className="font-medium block mb-2 text-violet-600 dark:text-violet-300">Key Features:</span>
+                              <ul className="list-disc list-inside pl-2 text-neutral-700 dark:text-neutral-300">
+                                {proj.features.map((feature, featureIndex) => (
+                                  <li key={featureIndex}>{feature}</li>
+                                ))}
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+
+                        {/* Botones */}
+                        <div className="flex flex-wrap gap-4 pt-6">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button
+                                className="flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white shadow-md transition-all duration-300"
+                              >
+                                <GoArrowUpRight />
+                                <span>View Demo</span>
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-3xl bg-neutral-900 text-gray-200">
+                              <DialogHeader>
+                                <DialogTitle className="text-violet-300">{proj.name} - Demo</DialogTitle>
+                              </DialogHeader>
+                              <span>VIDEO</span>
+                            </DialogContent>
+                          </Dialog>
+
+                          <a
+                            href={proj.githubLink}
+                            target="_blank"
+                            className="flex items-center gap-2 px-5 py-3 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-700/20 transition-all duration-300"
+                          >
+                            <FaGithub />
+                            <span>Source Code</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </CarouselItem>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
           </CarouselDApi>
         </section>
-        <section id="contact" className="w-full flex flex-col mt-10">
-          <h1 className="text-3xl text-white mb-6">Let's Connect!</h1>
-          {/* <div className="flex gap-10 w-full">
-            <ContactForm />
-            <h1>dada</h1>
-          </div> */}
-          <div className="flex flex-col md:flex-row gap-10 w-full">
-            {/* FORMULARIO */}
-            <div className="flex-1">
+        <section id="contact" className="w-full flex flex-col mt-20 px-6 md:px-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-14 text-neutral-900 dark:text-white tracking-tight">
+            Let’s <span className="text-violet-700 dark:text-violet-400">Connect!</span>
+          </h1>
+
+          <div className="flex flex-col md:flex-row gap-12 w-full">
+            {/* Form */}
+            <div className="flex-1 p-8 transition-all duration-300">
               <ContactForm />
             </div>
 
-            {/* INFO DE CONTACTO */}
-            <div className="flex-1 flex flex-col justify-center gap-5">
-              <a href="tel:+51997578610" className="flex items-center gap-4 px-3">
+            {/* Contact Cards */}
+            <div className="flex-1 flex flex-col justify-center gap-6">
+              {/* Phone */}
+              <a
+                href="tel:+51997578610"
+                className="group flex items-center gap-5 p-5 rounded-2xl bg-violet-950/30 border border-violet-800/30 hover:bg-violet-950/20 hover:shadow-violet-500/20 transition-all duration-300"
+              >
                 <ContactCard icon={FaPhoneAlt} />
                 <div className="flex flex-col">
-                  <span className="text-[#8f8f92] text-sm font-medium">Phone Number</span>
-                  <h6 className="text-white font-semibold text-base mt-1">+51-997-578-610</h6>
+                  <span className="text-violet-700 dark:text-violet-300 text-sm font-medium dark:group-hover:text-violet-200 group-hover:text-violet-600">
+                    Phone Number
+                  </span>
+                  <h6 className="text-white font-semibold text-base mt-1">
+                    +51-997-578-610
+                  </h6>
                 </div>
               </a>
 
-              <a href="mailto:f.cristobal.n0702@gmail.com" className="flex items-center gap-4 px-3">
+              {/* Email */}
+              <a
+                href="mailto:f.cristobal.n0702@gmail.com"
+                className="group flex items-center gap-5 p-5 rounded-2xl bg-violet-950/30 border border-violet-800/30 hover:bg-violet-950/20 hover:shadow-violet-500/20 transition-all duration-300"
+              >
                 <ContactCard icon={MdEmail} />
                 <div className="flex flex-col">
-                  <span className="text-[#8f8f92] text-sm font-medium">Email</span>
-                  <h6 className="text-white font-semibold text-base mt-1">f.cristobal.n0702@gmail.com</h6>
+                  <span className="text-violet-700 dark:text-violet-300 text-sm font-medium dark:group-hover:text-violet-200 group-hover:text-violet-600">
+                    Email
+                  </span>
+                  <h6 className="text-white font-semibold text-base mt-1">
+                    f.cristobal.n0702@gmail.com
+                  </h6>
                 </div>
               </a>
 
+              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/in/fabiancristobal/"
                 target="_blank"
-                className="flex items-center gap-4 px-3"
+                className="group flex items-center gap-5 p-5 rounded-2xl bg-violet-950/30 border border-violet-800/30 hover:bg-violet-950/20 hover:shadow-violet-500/20 transition-all duration-300"
               >
                 <ContactCard icon={FaLinkedin} />
                 <div className="flex flex-col">
-                  <span className="text-[#8f8f92] text-sm font-medium">LinkedIn</span>
-                  <h6 className="text-white font-semibold text-base mt-1">Fabian Cristobal</h6>
+                  <span className="text-violet-700 dark:text-violet-300 text-sm font-medium dark:group-hover:text-violet-200 group-hover:text-violet-600">
+                    LinkedIn
+                  </span>
+                  <h6 className="text-white font-semibold text-base mt-1">
+                    Fabian Cristobal
+                  </h6>
                 </div>
               </a>
 
+              {/* Fiverr */}
               <a
-                href="https://www.fiverr.com/s/EgNQKKD"
+                href="https://www.fiverr.com/fab_art16?public_mode=true"
                 target="_blank"
-                className="flex items-center gap-4 px-3"
+                className="group flex items-center gap-5 p-5 rounded-2xl bg-violet-950/30 border border-violet-800/30 hover:bg-violet-950/20 hover:shadow-violet-500/20 transition-all duration-300"
               >
                 <ContactCard image={FiverrLogo} />
                 <div className="flex flex-col">
-                  <span className="text-[#8f8f92] text-sm font-medium">Fiverr - Principal Service</span>
-                  <h6 className="text-white font-semibold text-base mt-1">Fabian C</h6>
+                  <span className="text-violet-700 dark:text-violet-300 text-sm font-medium dark:group-hover:text-violet-200 group-hover:text-violet-600">
+                    Fiverr
+                  </span>
+                  <h6 className="text-white font-semibold text-base mt-1">
+                    Fabian C
+                  </h6>
                 </div>
               </a>
             </div>
           </div>
-          
         </section>
       </main>
-      {/* <footer className="row-start-3 mt-10 w-full flex flex-col md:flex-row gap-6 md:gap-[24px] flex-wrap items-center justify-between border-t border-border py-6 px-4">
-        
-        <span className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Fabian Cristobal. All rights reserved.
-        </span>
-
-        
-        <nav className="flex gap-6 text-sm">
-          <a href="#home" className="hover:text-primary transition">Home</a>
-          <a href="#projects" className="hover:text-primary transition">Projects</a>
-          <a href="#contact" className="hover:text-primary transition">Contact</a>
-        </nav>
-
-        
-        <div className="flex gap-4">
-          <a
-            href="https://www.linkedin.com/in/fabiancristobal/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition"
-          >
-            GitHub
-          </a>
-          <a
-            href="mailto:f.cristobal.n0702@gmail.com"
-            className="hover:text-primary transition"
-          >
-            Email
-          </a>
-        </div>
-      </footer> */}
       <footer className="w-full border-t border-border mt-12 py-8 flex flex-col items-center gap-6">
         {/* Logo / Nombre */}
         <div className="flex items-center gap-2">
@@ -373,7 +518,7 @@ export default function Home() {
 
         {/* Redes sociales */}
         <div className="flex gap-6 text-2xl">
-          <a
+          {/* <a
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -388,6 +533,14 @@ export default function Home() {
             className="hover:text-primary transition"
           >
             <SiX />
+          </a> */}
+          <a
+            href="https://linkedin.com/in/fabiancristobal/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary transition"
+          >
+            <Image src={FiverrLogo} alt="Fiverr" className="size-6 text-gray-600 fill-current"/>
           </a>
           <a
             href="https://linkedin.com/in/fabiancristobal/"
@@ -423,6 +576,11 @@ export default function Home() {
           </a>
         </nav>
       </footer>
+      <div className="fixed bottom-6 right-6 z-50">
+        <div className="bg-purple-600 rounded-full shadow-lg hover:scale-110 transition p-3">
+          <ModeToggle />
+        </div>
+      </div>
     </div>
   );
 }
